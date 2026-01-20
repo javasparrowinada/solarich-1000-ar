@@ -1,49 +1,53 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Solarich 1000 AR</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solarich 1000 AR</title>
+  <style>
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#111}
+    .wrap{max-width:720px;margin:0 auto;padding:24px}
+    .logo{font-weight:700;font-size:28px;text-align:center;margin:8px 0 6px}
+    .note{background:#f6f6f6;border-radius:10px;padding:12px 14px;color:#c0392b;font-weight:700;text-align:center;line-height:1.5}
+    .btn{display:block;width:100%;border:0;border-radius:999px;padding:16px 18px;margin:18px 0;background:#1aa65b;color:#fff;font-size:22px;font-weight:800}
+    .sec{margin-top:14px}
+    h2{font-size:20px;margin:18px 0 10px}
+    ul{margin:0;padding-left:18px;line-height:1.9}
+    .close{display:block;margin:22px auto 0;border:1px solid #ddd;background:#fff;border-radius:8px;padding:12px 14px;font-size:16px}
+    .footer{margin-top:16px;text-align:center;color:#999;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">Solarich 1000</div>
 
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <div class="note">3Dデータの読込に4〜5秒かかる場合がございます。<br>ボタンタップ後そのままお待ち下さい。</div>
 
-    <style>
-      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-      header { padding: 16px; border-bottom: 1px solid #eee; }
-      .btns { display: flex; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #eee; flex-wrap: wrap; }
-      .btn {
-        display: inline-block; padding: 10px 14px; border-radius: 999px;
-        background: #111; color: #fff; text-decoration: none; font-weight: 700;
-      }
-      .btn.sub { background: #444; }
-      model-viewer { width: 100vw; height: calc(100vh - 170px); background: #fff; }
-    </style>
-  </head>
+    <!-- iOS Quick Look用：ここをボタンで起動 -->
+    <a id="ios-ar" rel="ar" href="model.usdz" style="display:none;"></a>
 
-  <body>
-    <header>
-      <h1 style="margin:0;font-size:28px;">Solarich 1000</h1>
-      <div style="margin-top:6px;color:#666;">iPhone: AR表示 / Android: AR表示 / PC: 3D表示</div>
-    </header>
+    <button class="btn" id="arBtn">ARを表示する</button>
 
-    <div class="btns">
-      <!-- iPhone / iPad 用：これが一番確実（ChromeでもSafariでも動く） -->
-      <a class="btn" href="./model.usdz" rel="ar">iPhoneでAR表示</a>
+    <div class="sec">
+      <h2>ARの操作方法</h2>
+      <ul>
+        <li>AR画面に入ったあと任意の場所をタップで設置できます。</li>
+        <li>一本指で位置を動かせます。</li>
+        <li>二本指でズームイン/アウト（縮尺が変わります）。</li>
+        <li>二本指で左右に動かすと回転します。</li>
+      </ul>
 
-      <!-- Android 用：Scene Viewer 起動 -->
-      <a class="btn sub" href="intent://arvr.google.com/scene-viewer/1.0?file=https://javasparrowinada.github.io/solarich-1000-ar/model.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;">
-        AndroidでAR表示
-      </a>
+      <button class="close" onclick="history.back()">× このページを閉じる</button>
+      <div class="footer">© Solarich</div>
     </div>
+  </div>
 
-    <!-- PC/スマホ共通：3D表示 -->
-    <model-viewer
-      src="./model.glb"
-      camera-controls
-      autoplay
-      shadow-intensity="0.2"
-      exposure="1"
-      alt="Solarich 1000 3D model">
-    </model-viewer>
-  </body>
+  <script>
+    document.getElementById('arBtn').addEventListener('click', () => {
+      // iPhone / iPad Safari: Quick Look AR
+      const a = document.getElementById('ios-ar');
+      a.click();
+    });
+  </script>
+</body>
 </html>
