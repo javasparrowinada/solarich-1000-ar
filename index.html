@@ -2,56 +2,22 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Solarich 1000 AR</title>
   <style>
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;background:#fff}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"Noto Sans JP",sans-serif;background:#fff;color:#111}
     .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .btn{display:inline-block;width:min(560px,100%);text-align:center;padding:18px 22px;border-radius:999px;
-         background:#16a34a;color:#fff;text-decoration:none;font-size:20px;font-weight:700}
-    .note{margin-top:14px;color:#666;font-size:13px;text-align:center}
+    .btn{display:block;width:min(520px,100%);text-align:center;padding:18px 18px;border-radius:999px;
+      background:#19a54a;color:#fff;text-decoration:none;font-size:22px;font-weight:800}
+    .note{margin-top:14px;color:#666;font-size:13px;text-align:center;line-height:1.6}
   </style>
 </head>
 <body>
-  <div class="wrap" id="app"></div>
-
-  <script>
-    const app = document.getElementById("app");
-
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isAndroid = /Android/.test(navigator.userAgent);
-
-    // iPhone/iPad: ワンタップでQuick Look起動（AR）
-    if (isIOS) {
-      app.innerHTML = `
-        <div>
-          <a class="btn" rel="ar" href="model.usdz">ARを表示する</a>
-          <div class="note">ボタンを押すとARが起動します</div>
-        </div>
-      `;
-    }
-    // Android: Scene Viewer起動（AR）
-    else if (isAndroid) {
-      const url = new URL("model.glb", location.href).href;
-      const sceneViewer =
-        "intent://arvr.google.com/scene-viewer/1.0?file=" + encodeURIComponent(url) +
-        "&mode=ar_preferred#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;";
-      app.innerHTML = `
-        <div>
-          <a class="btn" href="${sceneViewer}">ARを表示する</a>
-          <div class="note">対応端末でARが起動します</div>
-        </div>
-      `;
-    }
-    // PC: 3Dファイルへ（最短）
-    else {
-      app.innerHTML = `
-        <div>
-          <a class="btn" href="model.glb">3Dを開く</a>
-          <div class="note">PCでは3Dファイルを開きます</div>
-        </div>
-      `;
-    }
-  </script>
+  <div class="wrap">
+    <div>
+      <a class="btn" rel="ar" href="./model.usdz">ARを表示する</a>
+      <div class="note">ボタン後、数秒待つとモデルが表示されます。<br>右上の立方体でAR開始（iPhone仕様）</div>
+    </div>
+  </div>
 </body>
 </html>
