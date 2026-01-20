@@ -5,19 +5,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Solarich 1000 AR</title>
   <style>
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"Noto Sans JP",sans-serif;background:#fff;color:#111}
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .btn{display:block;width:min(520px,100%);text-align:center;padding:18px 18px;border-radius:999px;
-      background:#19a54a;color:#fff;text-decoration:none;font-size:22px;font-weight:800}
-    .note{margin-top:14px;color:#666;font-size:13px;text-align:center;line-height:1.6}
+    body { font-family: -apple-system, system-ui, sans-serif; margin: 0; padding: 24px; }
+    .note { background:#f3f4f6; padding:12px 14px; border-radius:12px; margin: 12px 0 18px; }
+    .btn { display:block; width:100%; max-width:520px; margin: 0 auto; padding:18px 16px;
+           border-radius:999px; border:0; font-size:20px; font-weight:700; }
+    .btn-ar { background:#16a34a; color:#fff; }
+    .hidden { position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div>
-      <a class="btn" rel="ar" href="./model.usdz">ARを表示する</a>
-      <div class="note">ボタン後、数秒待つとモデルが表示されます。<br>右上の立方体でAR開始（iPhone仕様）</div>
-    </div>
+  <h1>Solarich 1000</h1>
+
+  <div class="note">
+    3Dデータの読込に4〜5秒かかる場合があります。ボタンタップ後、そのままお待ち下さい。
   </div>
+
+  <button class="btn btn-ar" id="arBtn">ARを表示する</button>
+
+  <!-- 重要：rel="ar" + 子要素img が必要 -->
+  <a id="arLink" rel="ar" href="./model.usdz" class="hidden">
+    <img src="./poster.png" alt="AR" />
+  </a>
+
+  <script>
+    // iOS Safari想定：ユーザーのタップで rel=ar のリンクをクリック → Quick Look
+    document.getElementById('arBtn').addEventListener('click', () => {
+      document.getElementById('arLink').click();
+    });
+  </script>
 </body>
 </html>
